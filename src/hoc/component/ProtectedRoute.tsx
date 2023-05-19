@@ -5,7 +5,7 @@ interface ProtectedRouteProps {
 }
 
 const ProtectedRoute: React.FC<ProtectedRouteProps> = (props) => {
-  return <div>SOMETHING WENT WRONT GOING TO LOGIN</div>;
+  return <></>;
 };
 
 export default withAuth(ProtectedRoute);
