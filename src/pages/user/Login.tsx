@@ -13,10 +13,10 @@ export const Login = () => {
     event.preventDefault();
 
     try {
-      setKey(apiKey);
 
       localStorage.setItem('apiKey', apiKey);
       setIsLogged(true);
+      
     } catch (error) {
       setTimeout(() => {
         setFailedTryLogin(true);
