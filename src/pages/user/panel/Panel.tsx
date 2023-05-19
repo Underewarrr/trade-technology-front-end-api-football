@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import Header from '../../components/Header';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import ProtectedRoute from '../../../hoc/component/ProtectedRoute';
 
 const Panel = () => {
   const [selectedOption, setSelectedOption] = useState<string>('');
@@ -13,6 +14,8 @@ const Panel = () => {
 
   const renderRedirect = () => {
     switch (selectedOption) {
+      case 'countries':
+        return <Navigate to="/user/panel/countries" />;
       case 'leagues':
         return <Navigate to="/user/panel/leagues" />;
       case 'seasons':
@@ -26,9 +29,25 @@ const Panel = () => {
 
   return (
     <div>
+      
+      <ProtectedRoute />
       <Header />
       {renderRedirect()}
       <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Card style={{ width: '18rem', margin: '10px' }}>
+          <Card.Body>
+            <Card.Title>Countries</Card.Title>
+            <Card.Text>Explore countries information.</Card.Text>
+            <Button
+              variant={selectedOption === 'countries' ? 'primary' : 'outline-primary'}
+              onClick={() => handleOptionSelect('countries')}
+            >
+              Select
+            </Button>
+          </Card.Body>
+        </Card>
+
+
         <Card style={{ width: '18rem', margin: '10px' }}>
           <Card.Body>
             <Card.Title>Leagues</Card.Title>
@@ -41,6 +60,7 @@ const Panel = () => {
             </Button>
           </Card.Body>
         </Card>
+
         <Card style={{ width: '18rem', margin: '10px' }}>
           <Card.Body>
             <Card.Title>Seasons</Card.Title>

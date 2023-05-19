@@ -54,11 +54,23 @@ Para conseguir sua chave acesse :
 
 ### [API Doc](https://www.api-football.com/documentation-v3#section/Sample-Scripts/Java)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
 
 ## Front-End
+
+### High Order Componente
+O sistema de proteção de rotas funciona com uma [(hoc)](), esse componente é recarregado apenas nas rotas que o usuario tem permissão então algumas verificações e dados podem ser salvos e usados nesse componente quando necessario!
+Para proteger uma rota inicie o componente `<ProtectedRoute />`
+
+#### Rotas
+| Method | Path                       |                            PAGE                |
+| ------ | -------------------------- | -------------------------------------------------- |
+| FRONT    | user/login |      LOGIN WITH KEY            |
+| FRONT    | user/panel/countries |  LIST ALL COUNTRIES AVALIABLE LEAGUES            |
+| FRONT    | user/panel/leagues |  LIST ALL LEAGUES            |
+| FRONT    | user/panel/seasons |  LIST ALL LEAGUES            |
+| FRONT    | user/panel/teams |  LIST ALL LEAGUES            |
+ CHARACTER ON ACCOUNT |
+# Rotas Back-end
 
 ### Linguagem
 - Typescript/Javascript

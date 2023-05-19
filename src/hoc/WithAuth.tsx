@@ -23,17 +23,24 @@ const withAuth = <P extends object>(WrappedComponent: React.ComponentType<P>) =>
     useEffect(() => {
       const checkStatus = async () => {
         try {
+          if (!apiKey) {
+            setLoading(false);
+            return;
+          }
+
           const { data }: AxiosResponse<StatusResponse> = await axios.get('https://v3.football.api-sports.io/status', {
             headers: {
               'x-rapidapi-key': apiKey,
               'x-rapidapi-host': 'v3.football.api-sports.io',
             },
           });
+
+          console.log('data', data);
+
           if (!data.account) {
-            // If account or subscription is missing or not active, redirect to login
+            // If account is missing, redirect to login
             return;
           }
-
         } catch (error) {
           console.log(error);
         } finally {
@@ -42,7 +49,7 @@ const withAuth = <P extends object>(WrappedComponent: React.ComponentType<P>) =>
       };
 
       checkStatus();
-    }, []);
+    }, [apiKey]);
 
     if (loading) {
       return <div>Loading...</div>;

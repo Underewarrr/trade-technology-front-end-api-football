@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import ProtectedRoute from '../../../hoc/component/ProtectedRoute';
 import Header from '../../components/Header';
 
@@ -60,8 +61,10 @@ const Leagues = () => {
       <ul>
         {leagues.map((league) => (
           <li key={league.league.id}>
-            {league.league.name}
-            <img src={`https://media.api-sports.io/football/leagues/${league.league.id}.png`} alt={`${league.league.name} Logo`} />
+            <Link to={`/user/panel/leagues/${league.league.id}`}>
+              {league.league.name}
+              <img src={`https://media.api-sports.io/football/leagues/${league.league.id}.png`} alt={`${league.league.name} Logo`} />
+            </Link>
           </li>
         ))}
       </ul>

@@ -3,6 +3,7 @@ import { setKey } from '../../services/requests/request-football-api';
 
 import { Alert, Container, Button, Card, Form } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
+import Header from '../components/Header';
 
 export const Login = () => {
   const [apiKey, setApiKey] = useState('');
@@ -31,10 +32,11 @@ export const Login = () => {
     }, 1000);
   }, [apiKey]);
 
-  if (isLogged) return <Navigate to="/user/panel/leagues" />;
+  if (isLogged) return <Navigate to="/user/panel/" />;
 
   return (
     <>
+    <Header />
       <Form>
         <Card>
           <Card.Header>Login</Card.Header>

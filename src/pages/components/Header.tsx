@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent } from 'react';
+import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 
@@ -13,7 +14,8 @@ function Header() {
     return (
       <Navbar.Text>
         <input type="text" value={apiKey} onChange={handleApiKeyChange} placeholder="Enter API Key" />
-        <button>Login</button>
+        {' '}
+        <Button>Change API Key</Button>
       </Navbar.Text>
     );
   };
