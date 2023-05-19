@@ -31,7 +31,7 @@ export const Login = () => {
     }, 1000);
   }, [apiKey]);
 
-  if (isLogged) return <p>Is logged</p>;
+  if (isLogged) return <Navigate to="/user/panel/leagues" />;
 
   return (
     <>
@@ -60,11 +60,7 @@ export const Login = () => {
                 >
                   Login
                 </Button>
-                {failedTryLogin ? (
-                  <Alert variant="danger">
-                    A API Key não está correta. Por favor, tente novamente.
-                  </Alert>
-                ) : null}
+          
               </Card.Footer>
             </center>
           </Container>
