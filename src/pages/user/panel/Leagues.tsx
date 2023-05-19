@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import ProtectedRoute from '../../../hoc/component/ProtectedRoute';
+import Header from '../../components/Header';
+
 import axios from 'axios';
 
 interface League {
@@ -51,6 +54,8 @@ const Leagues = () => {
 
   return (
     <div>
+      <Header/>
+      <ProtectedRoute/>
       <h1>Leagues</h1>
       <ul>
         {leagues.map((league) => (
