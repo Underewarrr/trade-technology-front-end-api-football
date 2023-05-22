@@ -34,7 +34,7 @@ const Countries = () => {
         {countries.map((country) => (
           <li key={country.id}>
             {country.name}
-            <img src={country.flag} alt={`${country.name} Flag`} />
+            {/* <img src={country.flag} alt={`${country.name} Flag`} /> */}
           </li>
         ))}
       </ul>

@@ -28,7 +28,7 @@ const withAuth = <P extends object>(WrappedComponent: React.ComponentType<P>) =>
             return;
           }
 
-          const { data }: AxiosResponse<StatusResponse> = await axios.get('https://v3.football.api-sports.io/status', {
+       /*    const { data }: AxiosResponse<StatusResponse> = await axios.get('https://v3.football.api-sports.io/status', {
             headers: {
               'x-rapidapi-key': apiKey,
               'x-rapidapi-host': 'v3.football.api-sports.io',
@@ -40,7 +40,7 @@ const withAuth = <P extends object>(WrappedComponent: React.ComponentType<P>) =>
           if (!data.account) {
             // If account is missing, redirect to login
             return;
-          }
+          } */
         } catch (error) {
           console.log(error);
         } finally {
