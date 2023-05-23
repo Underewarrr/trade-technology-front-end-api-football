@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Alert, Form, Container } from 'react-bootstrap';
+import Header from '../../components/Header';
 
 const Leagues = ({ setLeagueId }) => {
   const [countries, setCountries] = useState([]);
@@ -8,7 +9,7 @@ const Leagues = ({ setLeagueId }) => {
   const [selectedCountry, setSelectedCountry] = useState('');
   const [leagues, setLeagues] = useState([]);
   const [seasons, setSeasons] = useState([]);
-  const [selectedSeason, setSelectedSeason] = useState(''); // New state variable for selected season
+  const [selectedSeason, setSelectedSeason] = useState('');
   const [dataFetched, setDataFetched] = useState(false); // Flag to track data fetch
   const [showAlert, setShowAlert] = useState(false); // Flag to show/hide the alert
 
@@ -108,12 +109,11 @@ const Leagues = ({ setLeagueId }) => {
       console.error('Error fetching seasons:', error);
     }
   };
-  
 
   const handleCountryChange = (event) => {
     setSelectedCountry(event.target.value);
     setSelectedLeague(''); // Reset selected league when country changes
-    setSeasons([]); // Reset seasons when country changes
+    setSelectedSeason(''); // Reset selected season when country changes
   };
 
   const handleLeagueChange = (event) => {
@@ -129,15 +129,15 @@ const Leagues = ({ setLeagueId }) => {
     try {
       localStorage.setItem('selectedCountry', selectedCountry);
       localStorage.setItem('selectedLeague', selectedLeague);
-      localStorage.setItem('selectedSeason', selectedSeason); // Store selected season in localStorage
+      localStorage.setItem('selectedSeason', selectedSeason);
       setShowAlert(true);
     } catch (error) {
-      console.error('Error storing selected country and league:', error);
+      console.error('Error storing selected country, league, and season:', error);
     }
   };
 
   return (
-    <Container>
+    <><Header /><Container>
       <h1>Countries</h1>
       {!dataFetched ? (
         <p>Loading...</p>
@@ -171,31 +171,35 @@ const Leagues = ({ setLeagueId }) => {
                 ))}
               </Form.Control>
             </Form.Group>
-            {seasons.length > 0 && ( // Display seasons dropdown if there are seasons available
-              <Form.Group controlId="seasonSelect">
-                <Form.Label>Select a season</Form.Label>
-                <Form.Control as="select" value={selectedSeason} onChange={handleSeasonChange}>
-                  <option value="">Select a season</option>
-                  {seasons.map((season) => (
-                    <option key={season.id} value={season.id}>
-                      {season.name}
-                    </option>
-                  ))}
-                </Form.Control>
-              </Form.Group>
-            )}
-            <Form.Group>
-              <Alert show={showAlert} variant="success" onClose={() => setShowAlert(false)} dismissible>
-                Selected country, league, and season stored successfully!
-              </Alert>
-              <button type="button" className="btn btn-primary" onClick={handleStoreSelection}>
-                Store Selection
-              </button>
-            </Form.Group>
           </Form>
         </div>
       )}
-    </Container>
+      {seasons.length > 0 && (
+        <div>
+          <h2>Seasons</h2>
+          <Form>
+            <Form.Group controlId="seasonSelect">
+              <Form.Label>Select a season</Form.Label>
+              <Form.Control as="select" value={selectedSeason} onChange={handleSeasonChange}>
+                <option value="">Select a season</option>
+                {seasons.map((season) => (
+                  <option key={season} value={season}>
+                    {season}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+          </Form>
+          <Alert show={showAlert} variant="success" onClose={() => setShowAlert(false)} dismissible>
+            Selected country, league, and season stored successfully!
+          </Alert>
+          <button type="button" className="btn btn-primary" onClick={handleStoreSelection}>
+            Save Selection
+          </button>
+        </div>
+
+      )}
+    </Container></>
   );
 };
 
