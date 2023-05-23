@@ -6,8 +6,6 @@ const Leagues = ({ setLeagueId }) => {
   const [selectedLeague, setSelectedLeague] = useState('');
   const [selectedCountry, setSelectedCountry] = useState('');
   const [leagues, setLeagues] = useState([]);
-  const [teams, setTeams] = useState([]);
-  const [matches, setMatches] = useState([]);
 
   useEffect(() => {
     // Make API request to fetch the list of countries
@@ -20,20 +18,19 @@ const Leagues = ({ setLeagueId }) => {
       fetchLeagues(selectedCountry);
     } else {
       setLeagues([]);
-      setTeams([]);
-      setMatches([]);
     }
   }, [selectedCountry]);
 
+  /* // Example 
   useEffect(() => {
     if (selectedLeague) {
       // Make API request to fetch teams for the selected league
       console.log(selectedLeague)
     } else {
-      setTeams([]);
+      console.Console()
     }
   }, [selectedLeague]);
-
+ */
   const fetchCountries = async () => {
     try {
       const apiKey = localStorage.getItem('apiKey');
