@@ -239,12 +239,19 @@ const handleViewTeam = (teamId) => {
             <Alert show={showAlert} variant="success" onClose={() => setShowAlert(false)} dismissible>
               Selected country, league, and season stored successfully!
             </Alert>
+           <div>
+            <br></br>
+            <center><container>
             <Button variant="primary" onClick={handleStoreSelection}>
-              Update Widget
+              Update Storage
             </Button>
+            {' '}
             <Button variant="primary" onClick={handleSearchTeams}>
               Search Teams
             </Button>
+            </container>
+            </center>
+           </div>
             {teams.length > 0 && (
               <div>
                 <h2>Search Result</h2>
