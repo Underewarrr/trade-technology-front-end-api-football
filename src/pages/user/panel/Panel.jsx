@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Alert, Form, Container } from 'react-bootstrap';
 import Header from '../../components/Header';
 
-const Leagues = ({ setLeagueId }) => {
+const Panel = ({ setLeagueId }) => {
   const [countries, setCountries] = useState([]);
   const [selectedLeague, setSelectedLeague] = useState('');
   const [selectedCountry, setSelectedCountry] = useState('');
@@ -12,6 +12,7 @@ const Leagues = ({ setLeagueId }) => {
   const [selectedSeason, setSelectedSeason] = useState('');
   const [dataFetched, setDataFetched] = useState(false); // Flag to track data fetch
   const [showAlert, setShowAlert] = useState(false); // Flag to show/hide the alert
+  const [teams, setTeams] = useState([]); // Search result state variable
 
   useEffect(() => {
     // Make API request to fetch the list of countries
@@ -30,7 +31,7 @@ const Leagues = ({ setLeagueId }) => {
   useEffect(() => {
     if (selectedLeague) {
       // Make API request to fetch seasons for the selected league
-      fetchSeasons(selectedLeague);
+      fetchSeasons();
     } else {
       setSeasons([]);
     }
@@ -43,7 +44,7 @@ const Leagues = ({ setLeagueId }) => {
         setCountries(JSON.parse(storedCountries));
         setDataFetched(true); // Data already fetched
       } else {
-        const apiKey = localStorage.getItem('apiKey');
+        const apiKey = localStorage.getItem('apiKey'); // Add your API key here
         console.log('Fetching countries...');
         const response = await axios.get('https://v3.football.api-sports.io/countries', {
           headers: {
@@ -67,7 +68,7 @@ const Leagues = ({ setLeagueId }) => {
       if (storedLeagues) {
         setLeagues(JSON.parse(storedLeagues));
       } else {
-        const apiKey = localStorage.getItem('apiKey');
+        const apiKey = localStorage.getItem('apiKey'); // Add your API key here
         console.log('Fetching leagues...');
         const response = await axios.get('https://v3.football.api-sports.io/leagues', {
           params: {
@@ -93,7 +94,7 @@ const Leagues = ({ setLeagueId }) => {
       if (storedSeasons) {
         setSeasons(JSON.parse(storedSeasons));
       } else {
-        const apiKey = localStorage.getItem('apiKey');
+        const apiKey = localStorage.getItem('apiKey'); // Add your API key here
         console.log('Fetching seasons...');
         const response = await axios.get('https://v3.football.api-sports.io/leagues/seasons', {
           headers: {
@@ -136,71 +137,122 @@ const Leagues = ({ setLeagueId }) => {
     }
   };
 
-  return (
-    <><Header /><Container>
-      <h1>Countries</h1>
-      {!dataFetched ? (
-        <p>Loading...</p>
-      ) : (
-        <Form>
-          <Form.Group controlId="countrySelect">
-            <Form.Label>Select a country</Form.Label>
-            <Form.Control as="select" value={selectedCountry} onChange={handleCountryChange}>
-              <option value="">Select a country</option>
-              {countries.map((country) => (
-                <option key={country.id} value={country.id}>
-                  {country.name}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-        </Form>
-      )}
-      {leagues.length > 0 && (
-        <div>
-          <h2>Leagues</h2>
-          <Form>
-            <Form.Group controlId="leagueSelect">
-              <Form.Label>Select a league</Form.Label>
-              <Form.Control as="select" value={selectedLeague} onChange={handleLeagueChange}>
-                <option value="">Select a league</option>
-                {leagues.map((league) => (
-                  <option key={league.league.id} value={league.league.id}>
-                    {league.league.name}
-                  </option>
-                ))}
-              </Form.Control>
-            </Form.Group>
-          </Form>
-        </div>
-      )}
-      {seasons.length > 0 && (
-        <div>
-          <h2>Seasons</h2>
-          <Form>
-            <Form.Group controlId="seasonSelect">
-              <Form.Label>Select a season</Form.Label>
-              <Form.Control as="select" value={selectedSeason} onChange={handleSeasonChange}>
-                <option value="">Select a season</option>
-                {seasons.map((season) => (
-                  <option key={season} value={season}>
-                    {season}
-                  </option>
-                ))}
-              </Form.Control>
-            </Form.Group>
-          </Form>
-          <Alert show={showAlert} variant="success" onClose={() => setShowAlert(false)} dismissible>
-            Selected country, league, and season stored successfully!
-          </Alert>
-          <button type="button" className="btn btn-primary" onClick={handleStoreSelection}>
-            Save Selection
-          </button>
-        </div>
+  const handleSearchTeams = async () => {
+    try {
+      const apiKey = localStorage.getItem('apiKey'); // Add your API key here
+      const teamsToFetch = Array.from({ length: 3 }, (_, i) => i); // Generate an array from 0 to 30
+      const teamsData = [];
+  
+      for (const teamId of teamsToFetch) {
+        const response = await axios.get('https://v3.football.api-sports.io/teams/statistics', {
+          params: {
+            league: selectedLeague,
+            season: selectedSeason,
+            team: teamId,
+          },
+          headers: {
+            'x-rapidapi-host': 'v3.football.api-sports.io',
+            'x-rapidapi-key': apiKey || '',
+          },
+        });
+  
+        const teamData = response.data.response;
+  
+        if (teamData && teamData.team) {
+          teamsData.push(teamData.team);
+        }
+      }
+  
+      console.log('Teams Data:', teamsData);
+      setTeams(teamsData);
+    } catch (error) {
+      console.error('Error searching teams:', error);
+    }
+  };
+  
+  
 
-      )}
-    </Container></>
+
+  return (
+    <>
+      <Header />
+      <Container>
+        <h1>Countries</h1>
+        {!dataFetched ? (
+          <p>Loading...</p>
+        ) : (
+          <Form>
+            <Form.Group controlId="countrySelect">
+              <Form.Label>Select a country</Form.Label>
+              <Form.Control as="select" value={selectedCountry} onChange={handleCountryChange}>
+                <option value="">Select a country</option>
+                {countries.map((country) => (
+                  <option key={country.id} value={country.id}>
+                    {country.name}
+                  </option>
+                ))}
+              </Form.Control>
+            </Form.Group>
+          </Form>
+        )}
+        {leagues.length > 0 && (
+          <div>
+            <h2>Leagues</h2>
+            <Form>
+              <Form.Group controlId="leagueSelect">
+                <Form.Label>Select a league</Form.Label>
+                <Form.Control as="select" value={selectedLeague} onChange={handleLeagueChange}>
+                  <option value="">Select a league</option>
+                  {leagues.map((league) => (
+                    <option key={league.league.id} value={league.league.id}>
+                      {league.league.name}
+                    </option>
+                  ))}
+                </Form.Control>
+              </Form.Group>
+            </Form>
+          </div>
+        )}
+        {seasons.length > 0 && (
+          <div>
+            <h2>Seasons</h2>
+            <Form>
+              <Form.Group controlId="seasonSelect">
+                <Form.Label>Select a season</Form.Label>
+                <Form.Control as="select" value={selectedSeason} onChange={handleSeasonChange}>
+                  <option value="">Select a season</option>
+                  {seasons.map((season) => (
+                    <option key={season} value={season}>
+                      {season}
+                    </option>
+                  ))}
+                </Form.Control>
+              </Form.Group>
+            </Form>
+            <Alert show={showAlert} variant="success" onClose={() => setShowAlert(false)} dismissible>
+              Selected country, league, and season stored successfully!
+            </Alert>
+            <button type="button" className="btn btn-primary" onClick={handleStoreSelection}>
+              Update Widget
+            </button>
+            <button type="button" className="btn btn-primary" onClick={handleSearchTeams}>
+              Search Teams
+            </button>
+            {teams.length > 0 && (
+              <div>
+                <h2>Search Result</h2>
+                <ul>
+                  {teams.map((team) => (
+                    <li key={team.id}>{team.name}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
+      </Container>
+    </>
   );
 };
 
-export default Leagues;
+export default Panel;
