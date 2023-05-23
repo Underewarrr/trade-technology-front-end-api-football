@@ -63,7 +63,8 @@ Para proteger uma rota inicie o componente `<ProtectedRoute />`
 
 ## Melhorias
 - [ ] criar um custom Hook para manipular o LocalStorage.
-
+- [ ] Adicionar Services para os requests.
+- [ ] Criar funções dinmaicas que se repetem em varias partes do códigos.
 
 #### Rotas
 | Method | Path                       |                            PAGE                |
