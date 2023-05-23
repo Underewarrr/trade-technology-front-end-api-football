@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Alert, Form, Container } from 'react-bootstrap';
+import { Alert, Form, Container, Button, Card } from 'react-bootstrap';
 import Header from '../../components/Header';
+import { useNavigate } from 'react-router-dom';
 
 const Panel = ({ setLeagueId }) => {
   const [countries, setCountries] = useState([]);
@@ -13,6 +14,12 @@ const Panel = ({ setLeagueId }) => {
   const [dataFetched, setDataFetched] = useState(false); // Flag to track data fetch
   const [showAlert, setShowAlert] = useState(false); // Flag to show/hide the alert
   const [teams, setTeams] = useState([]); // Search result state variable
+  const navigate = useNavigate();
+
+const handleViewTeam = (teamId) => {
+  localStorage.setItem('currentTeam', teamId);
+  navigate(`/user/panel/team/${teamId}`);
+};
 
   useEffect(() => {
     // Make API request to fetch the list of countries
@@ -140,38 +147,38 @@ const Panel = ({ setLeagueId }) => {
   const handleSearchTeams = async () => {
     try {
       const apiKey = localStorage.getItem('apiKey'); // Add your API key here
-      const teamsToFetch = Array.from({ length: 3 }, (_, i) => i); // Generate an array from 0 to 30
-      const teamsData = [];
-  
-      for (const teamId of teamsToFetch) {
-        const response = await axios.get('https://v3.football.api-sports.io/teams/statistics', {
-          params: {
-            league: selectedLeague,
-            season: selectedSeason,
-            team: teamId,
-          },
-          headers: {
-            'x-rapidapi-host': 'v3.football.api-sports.io',
-            'x-rapidapi-key': apiKey || '',
-          },
-        });
-  
-        const teamData = response.data.response;
-  
-        if (teamData && teamData.team) {
-          teamsData.push(teamData.team);
-        }
+
+      // Check if teams for the selected league are already stored
+      const storedTeams = localStorage.getItem(`teams-${selectedLeague}`);
+      if (storedTeams) {
+        console.log('Teams found in local storage:', JSON.parse(storedTeams));
+        setTeams(JSON.parse(storedTeams));
+        return;
       }
-  
+
+      // Teams not found in local storage, fetch them
+      const response = await axios.get('https://v3.football.api-sports.io/teams', {
+        params: {
+          league: selectedLeague,
+          season: selectedSeason,
+        },
+        headers: {
+          'x-rapidapi-host': 'v3.football.api-sports.io',
+          'x-rapidapi-key': apiKey || '',
+        },
+      });
+
+      const teamsData = response.data.response;
       console.log('Teams Data:', teamsData);
+
+      // Store the teams in local storage
+      localStorage.setItem(`teams-${selectedLeague}`, JSON.stringify(teamsData));
+
       setTeams(teamsData);
     } catch (error) {
       console.error('Error searching teams:', error);
     }
   };
-  
-  
-
 
   return (
     <>
@@ -232,20 +239,32 @@ const Panel = ({ setLeagueId }) => {
             <Alert show={showAlert} variant="success" onClose={() => setShowAlert(false)} dismissible>
               Selected country, league, and season stored successfully!
             </Alert>
-            <button type="button" className="btn btn-primary" onClick={handleStoreSelection}>
+            <Button variant="primary" onClick={handleStoreSelection}>
               Update Widget
-            </button>
-            <button type="button" className="btn btn-primary" onClick={handleSearchTeams}>
+            </Button>
+            <Button variant="primary" onClick={handleSearchTeams}>
               Search Teams
-            </button>
+            </Button>
             {teams.length > 0 && (
               <div>
                 <h2>Search Result</h2>
-                <ul>
+                <div className="card-deck d-flex flex-row flex-wrap">
                   {teams.map((team) => (
-                    <li key={team.id}>{team.name}</li>
+                    <Card key={team.team.id} style={{ width: '18rem' }}>
+                      <Card.Body>
+                        <Card.Title>{team.team.name}</Card.Title>
+                        <Card.Text>
+                          Venue: {team.venue.name}
+                          <br />
+                          Address: {team.venue.address}
+                        </Card.Text>
+                        <Button variant="primary" onClick={() => handleViewTeam(team.team.id)}>
+                          View Team
+                        </Button>
+                      </Card.Body>
+                    </Card>
                   ))}
-                </ul>
+                </div>
               </div>
             )}
           </div>
