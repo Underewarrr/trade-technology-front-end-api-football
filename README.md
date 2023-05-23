@@ -69,10 +69,10 @@ Para proteger uma rota inicie o componente `<ProtectedRoute />`
 | Method | Path                       |                            PAGE                |
 | ------ | -------------------------- | -------------------------------------------------- |
 | FRONT    | user/login |      LOGIN WITH KEY            |
-| FRONT    | user/panel/countries |  LIST ALL COUNTRIES AVALIABLE LEAGUES            |
-| FRONT    | user/panel/leagues |  LIST ALL LEAGUES            |
-| FRONT    | user/panel/seasons |  LIST ALL SEASONS            |
-| FRONT    | user/panel/teams    |  LIST ALL TEAMS            |
+| FRONT    | user/panel/ |  LIST ALL COUNTRIES AVALIABLE LEAGUES            |
+| FRONT    | user/panel/ |  LIST ALL LEAGUES            |
+| FRONT    | user/panel/ |  LIST ALL SEASONS            |
+| FRONT    | user/panel/    |  LIST ALL TEAMS            |
  CHARACTER ON ACCOUNT |
 # Rotas Back-end
 
