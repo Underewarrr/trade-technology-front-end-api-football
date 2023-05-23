@@ -61,8 +61,14 @@ Para conseguir sua chave acesse :
 O sistema de proteção de rotas funciona com uma [(hoc)](), esse componente é recarregado apenas nas rotas que o usuario tem permissão então algumas verificações e dados podem ser salvos e usados nesse componente quando necessario!
 Para proteger uma rota inicie o componente `<ProtectedRoute />`
 
+### AuthSystem
+Para autenticar as rotas após login usamos o axios para pegar e valida a key fornecida direamente na API, se o status da conta não for valido então redireciona para o login.
+
+### Armazenamento
+Não é possivel manter diversas requisições (No plano free) todos os dados são salvos no local storages e manipulados de la.
+
 ## Melhorias
-- [ ] criar um custom Hook para manipular o LocalStorage.
+- [ ] Criar um custom Hook para manipular o LocalStorage.
 - [ ] Adicionar Services para os requests.
 - [ ] Criar funções dinmaicas que se repetem em varias partes do códigos.
 

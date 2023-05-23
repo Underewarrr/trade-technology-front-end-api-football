@@ -23,7 +23,8 @@ function Header() {
   const renderLoggedInUser = () => {
     return (
       <Navbar.Text>
-        Signed in as: <a href="`/user/{$apiKey}`">KEY : {apiKey}</a>
+        Signed in as: <a href={`/user/profile-key/${apiKey}`}>KEY: {apiKey}</a>
+
       </Navbar.Text>
     );
   };
