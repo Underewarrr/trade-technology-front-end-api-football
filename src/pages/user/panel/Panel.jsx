@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Alert, Form, Container, Button, Card } from 'react-bootstrap';
 import Header from '../../components/Header';
 import { useNavigate } from 'react-router-dom';
+import ProtectedRoute from '../../../hoc/component/ProtectedRoute';
 
 const Panel = ({ setLeagueId }) => {
   const [countries, setCountries] = useState([]);
@@ -183,6 +184,8 @@ const handleViewTeam = (teamId) => {
   return (
     <>
       <Header />
+      <ProtectedRoute />
+
       <Container>
         <h1>Countries</h1>
         {!dataFetched ? (

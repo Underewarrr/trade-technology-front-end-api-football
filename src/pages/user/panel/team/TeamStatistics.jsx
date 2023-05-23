@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import ProtectedRoute from '../../../../hoc/component/ProtectedRoute';
 
 const TeamStatistics = () => {
   const [teamStatistics, setTeamStatistics] = useState(null);
@@ -37,6 +38,8 @@ const TeamStatistics = () => {
 
   return (
     <div>
+    <ProtectedRoute />
+
       <h1>Team Statistics</h1>
       {teamStatistics && teamStatistics.response.length > 0 ? (
   <div>

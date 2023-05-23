@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../../../components/Header';
 import TeamStatistics from './TeamStatistics';
-
+import ProtectedRoute from '../../../../hoc/component/ProtectedRoute';
 // To use as props pass as parameter { currentTeamId } and receive in componenet.
 const TeamInfo = () => {
   const [teamInfo, setTeamInfo] = useState({});
@@ -25,6 +25,7 @@ const TeamInfo = () => {
 
   return (
     <><Header />
+    <ProtectedRoute />
     <div>
           <h1>Team Information</h1>
           <div className="card">
