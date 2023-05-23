@@ -28,7 +28,7 @@ const Leagues = ({ setLeagueId }) => {
   useEffect(() => {
     if (selectedLeague) {
       // Make API request to fetch teams for the selected league
-      fetchTeams(selectedLeague);
+      console.log(selectedLeague)
     } else {
       setTeams([]);
     }
@@ -71,22 +71,7 @@ const Leagues = ({ setLeagueId }) => {
     }
   };
 
-  const fetchTeams = async (leagueId) => {
-    try {
-      const apiKey = localStorage.getItem('apiKey');
-      console.log('Fetching teams...');
-      const response = await axios.get(`https://v3.football.api-sports.io/teams?league=${leagueId}`, {
-        headers: {
-          'x-rapidapi-host': 'v3.football.api-sports.io',
-          'x-rapidapi-key': apiKey || '',
-        },
-      });
-      console.log('Teams:', response.data.response);
-      setTeams(response.data.response);
-    } catch (error) {
-      console.error('Error fetching teams:', error);
-    }
-  };
+  
 
   const handleCountryChange = (event) => {
     setSelectedCountry(event.target.value);
@@ -99,7 +84,7 @@ const Leagues = ({ setLeagueId }) => {
 
   return (
     <div>
-      <h1>Leagues</h1>
+      <h1>Contries</h1>
       <select value={selectedCountry} onChange={handleCountryChange}>
         <option value="">Select a country</option>
         {countries.map((country) => (
@@ -119,16 +104,6 @@ const Leagues = ({ setLeagueId }) => {
               </option>
             ))}
           </select>
-        </div>
-      )}
-      {teams.length > 0 && (
-        <div>
-          <h2>Teams</h2>
-          <ul>
-            {teams.map((team) => (
-              <li key={team.team.id}>{team.team.name}</li>
-            ))}
-          </ul>
         </div>
       )}
     </div>
