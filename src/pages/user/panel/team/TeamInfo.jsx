@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from 'react';
 
+
+// To use as props pass as parameter { currentTeamId } and receive in componenet.
 const TeamInfo = () => {
   const [teamInfo, setTeamInfo] = useState({});
 
+  const currentTeamId = parseInt(localStorage.getItem('currentTeam'));
+    console.log('currentTeamID', currentTeamId)
+
   useEffect(() => {
     // Fetch and set the team information from localStorage
-    const currentTeam = localStorage.getItem('currentTeam');
-    if (currentTeam) {
-      setTeamInfo(JSON.parse(currentTeam));
+    const teamsData = localStorage.getItem(`teams-73`); // Replace '73' with the appropriate league ID
+    console.log(teamsData)
+    if (teamsData) {
+      const teams = JSON.parse(teamsData);
+      const currentTeam = teams.find((team) => team.team.id === currentTeamId);
+      if (currentTeam) {
+        setTeamInfo(currentTeam.team);
+      }
     }
-  }, []);
+  }, [currentTeamId]);
 
   return (
     <div>
