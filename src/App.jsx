@@ -13,6 +13,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="user/login" element={<Login />} />
+          <Route path="/" element={<Login />} />
        
           <Route path="user/panel" element={<Panel />} />
           <Route path="user/panel/team/:id" element={<TeamInfo />} />
