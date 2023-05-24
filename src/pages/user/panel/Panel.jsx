@@ -7,20 +7,20 @@ import ProtectedRoute from '../../../hoc/component/ProtectedRoute';
 
 const Panel = ({ setLeagueId }) => {
   const [countries, setCountries] = useState([]);
-  const [selectedLeague, setSelectedLeague] = useState('');
-  const [selectedCountry, setSelectedCountry] = useState('');
+  const [selectedLeague, setSelectedLeague] = useState(localStorage.getItem('selectedLeague') || '');
+  const [selectedCountry, setSelectedCountry] = useState(localStorage.getItem('selectedCountry') || '');
   const [leagues, setLeagues] = useState([]);
   const [seasons, setSeasons] = useState([]);
-  const [selectedSeason, setSelectedSeason] = useState('');
+  const [selectedSeason, setSelectedSeason] = useState(localStorage.getItem('selectedSeason') || '');
   const [dataFetched, setDataFetched] = useState(false); // Flag to track data fetch
   const [showAlert, setShowAlert] = useState(false); // Flag to show/hide the alert
   const [teams, setTeams] = useState([]); // Search result state variable
   const navigate = useNavigate();
 
-const handleViewTeam = (teamId) => {
-  localStorage.setItem('currentTeam', teamId);
-  navigate(`/user/panel/team/${teamId}`);
-};
+  const handleViewTeam = (teamId) => {
+    localStorage.setItem('currentTeam', teamId);
+    navigate(`/user/panel/team/${teamId}`);
+  };
 
   useEffect(() => {
     // Make API request to fetch the list of countries
