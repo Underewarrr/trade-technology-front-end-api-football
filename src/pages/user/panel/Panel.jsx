@@ -184,8 +184,7 @@ const handleViewTeam = (teamId) => {
   return (
     <>
       <Header />
-      <ProtectedRoute />
-
+      <ProtectedRoute/>
       <Container>
         <h1>Countries</h1>
         {!dataFetched ? (
