@@ -1,55 +1,64 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import ProtectedRoute from '../../../../hoc/component/ProtectedRoute';
 
-const TeamStatistics = () => {
+const TeamStatistics = ({ teamId, selectedLeague }) => {
   const [teamStatistics, setTeamStatistics] = useState(null);
 
   useEffect(() => {
-    const fetchTeamStatistics = async () => {
-      // Retrieve the necessary values from local storage
-      const selectedSeason = localStorage.getItem('selectedSeason');
-      const selectedTeamId = localStorage.getItem('selectedTeam');
-      const selectedLeagueId = localStorage.getItem('selectedLeagueId');
-      const apiKey = localStorage.getItem('apiKey');
+    const storedTeamStatistics = localStorage.getItem(`teamStatistics-${teamId}`);
+    if (storedTeamStatistics) {
+      setTeamStatistics(JSON.parse(storedTeamStatistics));
+    } else {
+      fetchTeamStatistics();
+    }
+  }, [teamId, selectedLeague]);
 
-      try {
-        const response = await axios.get('https://v3.football.api-sports.io/teams/statistics', {
-            params: {
-                league: selectedLeagueId,
-                season: `${selectedLeagueId}-${selectedSeason}`,
-                team: selectedTeamId,
-            },
-            headers: {
-                'x-rapidapi-host': 'v3.football.api-sports.io',
-                'x-rapidapi-key': apiKey || '',
-            },
-            });
+  const fetchTeamStatistics = async () => {
+    const apiKey = localStorage.getItem('apiKey');
+    const selectedSeason = localStorage.getItem('selectedSeason');
 
+    try {
+      const response = await fetch(
+        `https://v3.football.api-sports.io/teams/statistics?team=${teamId}&season=${selectedSeason}&league=${selectedLeague}`,
+        {
+          method: 'GET',
+          headers: {
+            'x-rapidapi-host': 'v3.football.api-sports.io',
+            'x-rapidapi-key': apiKey || '',
+          },
+        }
+      );
 
-        setTeamStatistics(response.data);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchTeamStatistics();
-  }, []);
+      const data = await response.json();
+      const teamStatisticsData = data.response;
+      localStorage.setItem(`teamStatistics-${teamId}`, JSON.stringify(teamStatisticsData));
+      setTeamStatistics(teamStatisticsData);
+    } catch (error) {
+      console.error('Error fetching team statistics:', error);
+    }
+  };
 
   return (
     <div>
-    <ProtectedRoute />
-
-      <h1>Team Statistics</h1>
-      {teamStatistics && teamStatistics.response.length > 0 ? (
-  <div>
-    <p>Goals Scored: {teamStatistics.response[0].team.statistics.goals.scored}</p>
-    <p>Goals Conceded: {teamStatistics.response[0].team.statistics.goals.conceded}</p>
-    {/* Display more team statistics as needed */}
-  </div>
-) : (
-  <p>No team statistics available.</p>
-)}
+      <h2>Team Statistics</h2>
+      {teamStatistics && teamStatistics.goals && (
+        <div>
+          <p>Goals For:</p>
+          <ul>
+            <li>Total: {teamStatistics.goals.for.total.home}</li>
+            <li>Home: {teamStatistics.goals.for.total.away}</li>
+            <li>Away: {teamStatistics.goals.for.total.total}</li>
+          </ul>
+          <p>Goals Against:</p>
+          <ul>
+            <li>Total: {teamStatistics.goals.against.total.home}</li>
+            <li>Home: {teamStatistics.goals.against.total.away}</li>
+            <li>Away: {teamStatistics.goals.against.total.total}</li>
+          </ul>
+          <p>Wins: {teamStatistics.fixtures.wins.total}</p>
+          <p>Losses: {teamStatistics.fixtures.loses.total}</p>
+          {/* Add more team statistics as needed */}
+        </div>
+      )}
     </div>
   );
 };
