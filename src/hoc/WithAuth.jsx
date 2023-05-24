@@ -7,13 +7,22 @@ const withAuth = (WrappedComponent) => {
     const [loading, setLoading] = useState(true);
     const [accountStatus, setAccountStatus] = useState(null);
 
-    const apiKey = window.localStorage.getItem('apiKey');
-
     useEffect(() => {
       const checkStatus = async () => {
         try {
+          const apiKey = localStorage.getItem('apiKey');
+
           if (!apiKey) {
             setLoading(false);
+            return;
+          }
+
+          // Check if account status is already stored in local storage
+          const storedAccountStatus = localStorage.getItem('accountStatus');
+          if (storedAccountStatus) {
+            setAccountStatus(JSON.parse(storedAccountStatus));
+            setLoading(false);
+            console.log("Request Saved on High Order Componenet")
             return;
           }
 
@@ -23,18 +32,14 @@ const withAuth = (WrappedComponent) => {
               'x-rapidapi-host': 'v3.football.api-sports.io',
             },
           });
-
-          console.log('data', response.data);
-
-          if (!response) {
-            console.log(response.data.response.account)
-            // If account is missing, redirect to login
+          if (!response.data) {
+            console.log('Failed to fetch account status from API. Redirecting to login.');
             return;
           }
 
           // Save account status in local storage
           localStorage.setItem('accountStatus', JSON.stringify(response.data.response));
-          setAccountStatus(response.data);
+          setAccountStatus(response.data.response);
         } catch (error) {
           console.log(error);
         } finally {
@@ -43,21 +48,13 @@ const withAuth = (WrappedComponent) => {
       };
 
       checkStatus();
-    }, [apiKey]);
-
-    useEffect(() => {
-      // Retrieve account status from local storage
-      const storedAccountStatus = localStorage.getItem('accountStatus');
-      if (storedAccountStatus) {
-        setAccountStatus(JSON.parse(storedAccountStatus));
-      }
     }, []);
 
     if (loading) {
       return <div>Loading...</div>;
     }
 
-    if (!apiKey || !accountStatus) {
+    if (!accountStatus) {
       return <Navigate to="/user/login" />;
     }
 
