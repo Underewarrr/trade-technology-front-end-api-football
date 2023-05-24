@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const TeamStatistics = ({ teamId, selectedLeague }) => {
-  const [teamStatistics, setTeamStatistics] = useState(null);
+  const [teamStatistics, setTeamStatistics] = useState();
 
   useEffect(() => {
     const storedTeamStatistics = localStorage.getItem(`teamStatistics-${teamId}`);
@@ -17,21 +17,24 @@ const TeamStatistics = ({ teamId, selectedLeague }) => {
     const selectedSeason = localStorage.getItem('selectedSeason');
 
     try {
-      const response = await fetch(
-        `https://v3.football.api-sports.io/teams/statistics?team=${teamId}&season=${selectedSeason}&league=${selectedLeague}`,
-        {
-          method: 'GET',
-          headers: {
-            'x-rapidapi-host': 'v3.football.api-sports.io',
-            'x-rapidapi-key': apiKey || '',
-          },
-        }
-      );
+      const storedTeamStatistics = localStorage.getItem(`teamStatistics-${teamId}`);
+      if (!storedTeamStatistics) {
+        const response = await fetch(
+          `https://v3.football.api-sports.io/teams/statistics?team=${teamId}&season=${selectedSeason}&league=${selectedLeague}`,
+          {
+            method: 'GET',
+            headers: {
+              'x-rapidapi-host': 'v3.football.api-sports.io',
+              'x-rapidapi-key': apiKey || '',
+            },
+          }
+        );
 
-      const data = await response.json();
-      const teamStatisticsData = data.response;
-      localStorage.setItem(`teamStatistics-${teamId}`, JSON.stringify(teamStatisticsData));
-      setTeamStatistics(teamStatisticsData);
+        const data = await response.json();
+        const teamStatisticsData = data.response;
+        localStorage.setItem(`teamStatistics-${teamId}`, JSON.stringify(teamStatisticsData));
+        setTeamStatistics(teamStatisticsData);
+      }
     } catch (error) {
       console.error('Error fetching team statistics:', error);
     }

@@ -2,28 +2,30 @@ import React, { useEffect, useState } from 'react';
 import Header from '../../../components/Header';
 import ProtectedRoute from '../../../../hoc/component/ProtectedRoute';
 import TeamStatistics from './TeamStatistics';
-import { Card, Image } from 'react-bootstrap'; // Import the Card and Image components from React-Bootstrap
+import { Card, Image } from 'react-bootstrap';
+import PlayerList from './PlayersList';
 
 const TeamInfo = () => {
   const [teamInfo, setTeamInfo] = useState({});
   const [selectedLeague, setSelectedLeague] = useState('');
 
   const currentTeamId = parseInt(localStorage.getItem('currentTeam'));
+  const leagueId = localStorage.getItem('selectedLeague');
+  const season = localStorage.getItem('selectedSeason');
 
   useEffect(() => {
-    // Fetch and set the team information from localStorage
     const teamsData = localStorage.getItem(`teams-${selectedLeague}`);
     if (teamsData) {
       const teams = JSON.parse(teamsData);
       const currentTeam = teams.find((team) => team.team.id === currentTeamId);
       if (currentTeam) {
         setTeamInfo(currentTeam.team);
+        localStorage.setItem('currentTeamName', currentTeam.team.name); // Save the team name to local storage
       }
     }
   }, [currentTeamId, selectedLeague]);
 
   useEffect(() => {
-    // Retrieve the selectedLeague from localStorage
     const storedSelectedLeague = localStorage.getItem('selectedLeague');
     if (storedSelectedLeague) {
       setSelectedLeague(storedSelectedLeague);
@@ -51,13 +53,13 @@ const TeamInfo = () => {
         <Card>
           <Card.Body>
             <Card.Title>Logo</Card.Title>
-            <Image src={teamInfo.logo} alt={teamInfo.name} width={128} height={128} rounded /> {/* Display the logo as an image with a size of 128x128 pixels */}
+            <Image src={teamInfo.logo} alt={teamInfo.name} width={128} height={128} rounded />
           </Card.Body>
         </Card>
-        {/* Add more Card components for additional team information */}
       </div>
       <div>
         <TeamStatistics teamId={currentTeamId} selectedLeague={selectedLeague} />
+        <PlayerList leagueId={leagueId} season={season} />
       </div>
     </>
   );
