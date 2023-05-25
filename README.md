@@ -96,7 +96,6 @@ Não é possivel manter diversas requisições (No plano free) todos os dados s�
 | FRONT    | user/view/profile-key |  SEE ALL INFORMTION ABOUT YOUR KEY SUCH AS MAXIMUM REQUEST AND ACTUAL REQUEST          |
 | FRONT    | user/panel/team:id |  SEEL ALL TEAM INFORMATION SUCH AS PLAYERS            |
 
- CHARACTER ON ACCOUNT |
 # Rotas Back-end
 
 ### Linguagem
