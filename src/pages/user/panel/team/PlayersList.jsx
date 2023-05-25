@@ -4,7 +4,13 @@ const PlayerList = ({ leagueId, season }) => {
   const [players, setPlayers] = useState([]);
 
   useEffect(() => {
-    fetchPlayers();
+    const storedPlayers = JSON.parse(localStorage.getItem('players'));
+    console.log('Players found in local storage', storedPlayers)
+    if (storedPlayers && storedPlayers.length > 0) {
+      setPlayers(storedPlayers);
+    } else {
+      fetchPlayers();
+    }
   }, []);
 
   const fetchPlayers = async () => {
@@ -25,6 +31,7 @@ const PlayerList = ({ leagueId, season }) => {
       const data = await response.json();
       console.log('Player List:', data);
       setPlayers(data.response);
+      localStorage.setItem('players', JSON.stringify(data.response));
     } catch (error) {
       console.error('Error fetching player list:', error);
     }
