@@ -2,17 +2,14 @@
 [Create React App](https://github.com/facebook/create-react-app).
 
 ### [League -> Team Information -> Team Statistics -> PlayerInformation + AuthSystem ](https://github.com/Underewarrr/trade-technology-front-end-api-football/pull/2)
+![image](https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/7b9ac410-ad10-4de7-b432-d5c2adcde630)
 
 # IMG's
 <details>
   <summary>Front-End</summary>
-  <h3> /user/login </h3>
   <img src="https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/cd6d95d3-445e-434a-b13d-79e35d699195" />
-  <h3> /user/profile-key </h3>
   <img src="https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/c18511ea-0b0f-4ac3-8deb-d2fea2a3309c"/>
-  <h3> /user/panel </h3>
    <img src="https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/0a833ac5-1990-4bdc-b49a-2dc34fb9c5b5"/>
-  <h3> /user/team/id </h3>
   <img src="https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/487213ca-5087-4a90-a271-9870fcd7710d" />
   <img src="https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/be63f016-0e49-49f1-9666-7230d281d101" />
   <img src="https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/a38249ac-38f4-4154-b1ab-9ea80df17ea2" />
