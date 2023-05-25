@@ -1,6 +1,8 @@
 # Sobre o Projeto
 [Create React App](https://github.com/facebook/create-react-app).
 
+### [League -> Team Information -> Team Statistics -> PlayerInformation + AuthSystem ](https://github.com/Underewarrr/trade-technology-front-end-api-football/pull/2)
+
 # IMG's
 <details>
   <summary>Front-End</summary>
