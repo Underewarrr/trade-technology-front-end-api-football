@@ -13,7 +13,8 @@
   <h3> /user/team/id </h3>
   <img src="https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/487213ca-5087-4a90-a271-9870fcd7710d" />
   <img src="https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/be63f016-0e49-49f1-9666-7230d281d101" />
-  <img src="https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/b8925bf9-fbfb-4054-a6b3-a89d97fe8772" />
+  <img src="https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/a38249ac-38f4-4154-b1ab-9ea80df17ea2" />
+ <img src="https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/b8925bf9-fbfb-4054-a6b3-a89d97fe8772" />
 </details>
 
 ## Scripts disponiveis
