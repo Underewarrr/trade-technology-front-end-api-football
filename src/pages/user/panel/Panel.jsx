@@ -244,6 +244,8 @@ const Panel = ({ setLeagueId }) => {
            <div>
             <br></br>
             <center><container>
+            <p>Antes de procurar atualize seus dados locais no botão Update Storage</p>
+
             <Button variant="primary" onClick={handleStoreSelection}>
               Update Storage
             </Button>
