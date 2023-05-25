@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { setKey } from '../../services/requests/request-football-api';
 
-import { Alert, Container, Button, Card, Form } from 'react-bootstrap';
+import { Container, Button, Card, Form } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 import Header from '../components/Header';
 
