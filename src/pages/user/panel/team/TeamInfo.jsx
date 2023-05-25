@@ -16,7 +16,7 @@ const TeamInfo = () => {
 
   useEffect(() => {
     const teamsData = localStorage.getItem(`teams-${selectedLeague}`);
-    console.log("Team information found in localstorage", teamsData)
+    console.log("Team information found in localstorage")
     if (teamsData) {
       const teams = JSON.parse(teamsData);
       const currentTeam = teams.find((team) => team.team.id === currentTeamId);

@@ -6,7 +6,7 @@ const PlayerList = ({ teamId }) => {
 
   useEffect(() => {
     const storedSquad = JSON.parse(localStorage.getItem(`squad_${teamId}`));
-    console.log("Player Squad found in localstorage", storedSquad)
+    console.log("PlayerList Squad found in localstorage")
     if (storedSquad && storedSquad.length > 0) {
       setSquad(storedSquad);
     } else {

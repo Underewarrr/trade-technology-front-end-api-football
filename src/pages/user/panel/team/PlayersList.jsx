@@ -5,7 +5,7 @@ const PlayerList = ({ leagueId, season }) => {
 
   useEffect(() => {
     const storedPlayers = JSON.parse(localStorage.getItem('players'));
-    console.log('Players found in local storage', storedPlayers)
+    console.log('PlayersList found in local storage')
     if (storedPlayers && storedPlayers.length > 0) {
       setPlayers(storedPlayers);
     } else {
