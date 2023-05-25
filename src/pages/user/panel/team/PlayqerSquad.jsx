@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
+import Card from 'react-bootstrap/Card';
 
 const PlayerList = ({ teamId }) => {
   const [squad, setSquad] = useState([]);
 
   useEffect(() => {
-    const storedSquad = JSON.parse(localStorage.getItem('squad'));
-    console.log("Stored Squad Found in LocalStorage", storedSquad)
+    const storedSquad = JSON.parse(localStorage.getItem(`squad_${teamId}`));
+    console.log("Player Squad found in localstorage", storedSquad)
     if (storedSquad && storedSquad.length > 0) {
       setSquad(storedSquad);
     } else {
@@ -31,7 +32,7 @@ const PlayerList = ({ teamId }) => {
       const data = await response.json();
       console.log('Squad:', data);
       setSquad(data.response[0].players);
-      localStorage.setItem('squad', JSON.stringify(data.response[0].players));
+      localStorage.setItem(`squad_${teamId}`, JSON.stringify(data.response[0].players));
     } catch (error) {
       console.error('Error fetching squad:', error);
     }
@@ -40,15 +41,24 @@ const PlayerList = ({ teamId }) => {
   return (
     <div>
       <h2>Squad</h2>
-      <ul>
+      <div className="card-container">
         {squad.map((player) => (
-          <li key={player.id}>
-            <img src={player.photo} alt={player.name} />
-            <p>Name: {player.name}</p>
-            {/* Add more player information as needed */}
-          </li>
+          <Card key={player.id} style={{ width: '18rem' }}>
+            <div className="card-img-container">
+              <Card.Img
+                variant="top"
+                src={player.photo}
+                alt={player.name}
+                className="player-photo"
+              />
+            </div>
+            <Card.Body>
+              <Card.Title>{player.name}</Card.Title>
+              {/* Add more player information as needed */}
+            </Card.Body>
+          </Card>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
