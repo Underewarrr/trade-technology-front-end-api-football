@@ -1,6 +1,21 @@
 # Sobre o Projeto
 [Create React App](https://github.com/facebook/create-react-app).
 
+### [League -> Team Information -> Team Statistics -> PlayerInformation + AuthSystem ](https://github.com/Underewarrr/trade-technology-front-end-api-football/pull/2)
+![image](https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/7b9ac410-ad10-4de7-b432-d5c2adcde630)
+
+# IMG's
+<details>
+  <summary>Front-End</summary>
+  <img src="https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/cd6d95d3-445e-434a-b13d-79e35d699195" />
+  <img src="https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/c18511ea-0b0f-4ac3-8deb-d2fea2a3309c"/>
+   <img src="https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/0a833ac5-1990-4bdc-b49a-2dc34fb9c5b5"/>
+  <img src="https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/487213ca-5087-4a90-a271-9870fcd7710d" />
+  <img src="https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/be63f016-0e49-49f1-9666-7230d281d101" />
+  <img src="https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/a38249ac-38f4-4154-b1ab-9ea80df17ea2" />
+ <img src="https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/b8925bf9-fbfb-4054-a6b3-a89d97fe8772" />
+</details>
+
 ## Scripts disponiveis
 
 Nesse projeto você pode rodar os seguintes comandos.
@@ -70,18 +85,19 @@ Não é possivel manter diversas requisições (No plano free) todos os dados s�
 ## Melhorias
 - [ ] Criar um custom Hook para manipular o LocalStorage.
 - [ ] Adicionar Services para os requests.
-- [ ] Criar funções dinmaicas que se repetem em varias partes do códigos.
+
+- [ ] Criar funções dinmaicas para reduzir as funções que se repetem em varias partes do códigos.
+- [ ] Usar o useMemo() para criar alertas nas rotas da pagina.
+
 
 #### Rotas
 | Method | Path                       |                            PAGE                |
 | ------ | -------------------------- | -------------------------------------------------- |
 | FRONT    | user/login |      LOGIN WITH KEY            |
-| FRONT    | user/panel/ |  LIST ALL COUNTRIES AVALIABLE LEAGUES            |
-| FRONT    | user/panel/ |  LIST ALL LEAGUES            |
-| FRONT    | user/panel/ |  LIST ALL SEASONS            |
-| FRONT    | user/panel/    |  LIST ALL TEAMS            |
- CHARACTER ON ACCOUNT |
-# Rotas Back-end
+| FRONT    | user/panel/ |  LISTA ALL TEAMS RELATED TO CONTRIES AND LEAGUES           |
+| FRONT    | user/view/profile-key |  SEE ALL INFORMTION ABOUT YOUR KEY SUCH AS MAXIMUM REQUEST AND ACTUAL REQUEST          |
+| FRONT    | user/panel/team:id |  SEEL ALL TEAM INFORMATION SUCH AS PLAYERS            |
+
 
 ### Linguagem
 - Typescript/Javascript
