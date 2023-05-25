@@ -10,6 +10,11 @@ function Header() {
     setApiKey(event.target.value);
   };
 
+  const handleLogout = () => {
+    window.localStorage.removeItem('apiKey');
+    setApiKey('');
+  };
+
   const renderLoginInput = () => {
     return (
       <Navbar.Text>
@@ -24,6 +29,8 @@ function Header() {
     return (
       <Navbar.Text>
         Signed in as: <a href={`/user/profile-key/${apiKey}`}>KEY: {apiKey}</a>
+        {' '}
+        <Button onClick={handleLogout}>Logout</Button>
       </Navbar.Text>
     );
   };
