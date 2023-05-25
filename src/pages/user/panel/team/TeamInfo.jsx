@@ -4,6 +4,7 @@ import ProtectedRoute from '../../../../hoc/component/ProtectedRoute';
 import TeamStatistics from './TeamStatistics';
 import { Card, Image } from 'react-bootstrap';
 import PlayerList from './PlayersList';
+import PlayqerSquad from './PlayqerSquad';
 
 const TeamInfo = () => {
   const [teamInfo, setTeamInfo] = useState({});
@@ -59,7 +60,10 @@ const TeamInfo = () => {
       </div>
       <div>
         <TeamStatistics teamId={currentTeamId} selectedLeague={selectedLeague} />
-        <PlayerList leagueId={leagueId} season={season} />
+        {/*
+        Filter all players from seasons and league
+        <PlayerList leagueId={leagueId} season={season} /> */}
+        <PlayqerSquad teamId={currentTeamId} />
       </div>
     </>
   );
