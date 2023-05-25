@@ -4,9 +4,9 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 
 function Header() {
-  const [apiKey, setApiKey] = useState<string>(window.localStorage.getItem('apiKey') || '');
+  const [apiKey, setApiKey] = useState(window.localStorage.getItem('apiKey') || '');
 
-  const handleApiKeyChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleApiKeyChange = (event) => {
     setApiKey(event.target.value);
   };
 
@@ -24,7 +24,6 @@ function Header() {
     return (
       <Navbar.Text>
         Signed in as: <a href={`/user/profile-key/${apiKey}`}>KEY: {apiKey}</a>
-
       </Navbar.Text>
     );
   };

@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Button, Card, Form } from 'react-bootstrap';
+import { Container, Button, Card, Form, Alert } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 import Header from '../components/Header';
 
 export const Login = () => {
-  const expectedApiKey = '64b54e7f60f950a67ab08edacb0d6e98';
   const [apiKey, setApiKey] = useState('');
   const [isLogged, setIsLogged] = useState(false);
   const [failedTryLogin, setFailedTryLogin] = useState(false);
 
-  const login = async (event) => {
+  const login = (event) => {
     event.preventDefault();
 
-    if (apiKey === expectedApiKey) {
+    if (apiKey.length > 20) {
       try {
         localStorage.setItem('apiKey', apiKey);
         setIsLogged(true);
@@ -48,22 +47,30 @@ export const Login = () => {
             <center>
               <Card.Body>
                 {failedTryLogin && (
-                  <Card.Text style={{ color: 'red' }}>Invalid API Key. Please try again.</Card.Text>
+                  <Alert variant="danger" data-testid="error-alert">
+                    API Key must be at least 20 characters long.
+                  </Alert>
                 )}
                 <Form.Group className="mb-3" controlId="FormasicApiKey">
                   <Form.Label>API Key:</Form.Label>
                   <Form.Control
                     value={apiKey}
-                    onChange={({ target: { value } }) => setApiKey(value)}
+                    onChange={(event) => setApiKey(event.target.value)}
                     name="apiKey"
                     type="text"
                     placeholder="Enter your API Key"
+                    data-testid="api-key-input" // Updated data-testid attribute
                   />
                 </Form.Group>
               </Card.Body>
               <Card.Footer>
-                <Button variant="primary" type="submit" onClick={(event) => login(event)}>
-                  Log in
+                <Button
+                  variant="primary"
+                  type="submit"
+                  onClick={login}
+                  data-testid="login-button"
+                >
+                  Sign
                 </Button>
               </Card.Footer>
             </center>

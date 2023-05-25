@@ -184,19 +184,24 @@ const Panel = ({ setLeagueId }) => {
   return (
     <>
       <Header />
-      <ProtectedRoute/>
-      <Container>
-        <h1>Countries</h1>
+      <ProtectedRoute />
+      <Container data-testid="panel-container">
+        <h1 data-testid="panel-title">Countries</h1>
         {!dataFetched ? (
-          <p>Loading...</p>
+          <p data-testid="loading-message">Loading...</p>
         ) : (
           <Form>
             <Form.Group controlId="countrySelect">
               <Form.Label>Select a country</Form.Label>
-              <Form.Control as="select" value={selectedCountry} onChange={handleCountryChange}>
+              <Form.Control
+                as="select"
+                value={selectedCountry}
+                onChange={handleCountryChange}
+                data-testid="country-select"
+              >
                 <option value="">Select a country</option>
                 {countries.map((country) => (
-                  <option key={country.id} value={country.id}>
+                  <option key={country.id} value={country.id} data-testid="country-option">
                     {country.name}
                   </option>
                 ))}
@@ -206,14 +211,23 @@ const Panel = ({ setLeagueId }) => {
         )}
         {leagues.length > 0 && (
           <div>
-            <h2>Leagues</h2>
+            <h2 data-testid="leagues-title">Leagues</h2>
             <Form>
               <Form.Group controlId="leagueSelect">
                 <Form.Label>Select a league</Form.Label>
-                <Form.Control as="select" value={selectedLeague} onChange={handleLeagueChange}>
+                <Form.Control
+                  as="select"
+                  value={selectedLeague}
+                  onChange={handleLeagueChange}
+                  data-testid="league-select"
+                >
                   <option value="">Select a league</option>
                   {leagues.map((league) => (
-                    <option key={league.league.id} value={league.league.id}>
+                    <option
+                      key={league.league.id}
+                      value={league.league.id}
+                      data-testid="league-option"
+                    >
                       {league.league.name}
                     </option>
                   ))}
@@ -224,41 +238,60 @@ const Panel = ({ setLeagueId }) => {
         )}
         {seasons.length > 0 && (
           <div>
-            <h2>Seasons</h2>
+            <h2 data-testid="seasons-title">Seasons</h2>
             <Form>
               <Form.Group controlId="seasonSelect">
                 <Form.Label>Select a season</Form.Label>
-                <Form.Control as="select" value={selectedSeason} onChange={handleSeasonChange}>
+                <Form.Control
+                  as="select"
+                  value={selectedSeason}
+                  onChange={handleSeasonChange}
+                  data-testid="season-select"
+                >
                   <option value="">Select a season</option>
                   {seasons.map((season) => (
-                    <option key={season} value={season}>
+                    <option key={season} value={season} data-testid="season-option">
                       {season}
                     </option>
                   ))}
                 </Form.Control>
               </Form.Group>
             </Form>
-            <Alert show={showAlert} variant="success" onClose={() => setShowAlert(false)} dismissible>
+            <Alert
+              show={showAlert}
+              variant="success"
+              onClose={() => setShowAlert(false)}
+              dismissible
+              data-testid="success-alert"
+            >
               Selected country, league, and season stored successfully!
             </Alert>
-           <div>
-            <br></br>
-            <center><container>
-            <p>Antes de procurar atualize seus dados locais no botão Update Storage</p>
+            <div>
+              <br></br>
+              <center>
+                <container>
+                  <p>Antes de procurar atualize seus dados locais no botão Update Storage</p>
 
-            <Button variant="primary" onClick={handleStoreSelection}>
-              Update Storage
-            </Button>
-            {' '}
-            <Button variant="primary" onClick={handleSearchTeams}>
-              Search Teams
-            </Button>
-            </container>
-            </center>
-           </div>
+                  <Button
+                    variant="primary"
+                    onClick={handleStoreSelection}
+                    data-testid="update-storage-button"
+                  >
+                    Update Storage
+                  </Button>{" "}
+                  <Button
+                    variant="primary"
+                    onClick={handleSearchTeams}
+                    data-testid="search-teams-button"
+                  >
+                    Search Teams
+                  </Button>
+                </container>
+              </center>
+            </div>
             {teams.length > 0 && (
               <div>
-                <h2>Search Result</h2>
+                <h2 data-testid="search-result-title">Search Result</h2>
                 <div className="card-deck d-flex flex-row flex-wrap">
                   {teams.map((team) => (
                     <Card key={team.team.id} style={{ width: '18rem' }}>
@@ -269,7 +302,11 @@ const Panel = ({ setLeagueId }) => {
                           <br />
                           Address: {team.venue.address}
                         </Card.Text>
-                        <Button variant="primary" onClick={() => handleViewTeam(team.team.id)}>
+                        <Button
+                          variant="primary"
+                          onClick={() => handleViewTeam(team.team.id)}
+                          data-testid="view-team-button"
+                        >
                           View Team
                         </Button>
                       </Card.Body>
