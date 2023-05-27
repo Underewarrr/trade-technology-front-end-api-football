@@ -85,8 +85,10 @@ Não é possivel manter diversas requisições (No plano free) todos os dados s�
 ## Melhorias
 - [ ] Criar um custom Hook para manipular o LocalStorage.
 - [ ] Adicionar Services para os requests.
+
 - [ ] Criar funções dinmaicas para reduzir as funções que se repetem em varias partes do códigos.
 - [ ] Usar o useMemo() para criar alertas nas rotas da pagina.
+
 
 #### Rotas
 | Method | Path                       |                            PAGE                |
@@ -95,6 +97,7 @@ Não é possivel manter diversas requisições (No plano free) todos os dados s�
 | FRONT    | user/panel/ |  LISTA ALL TEAMS RELATED TO CONTRIES AND LEAGUES           |
 | FRONT    | user/view/profile-key |  SEE ALL INFORMTION ABOUT YOUR KEY SUCH AS MAXIMUM REQUEST AND ACTUAL REQUEST          |
 | FRONT    | user/panel/team:id |  SEEL ALL TEAM INFORMATION SUCH AS PLAYERS            |
+
 
 ### Linguagem
 - Typescript/Javascript
