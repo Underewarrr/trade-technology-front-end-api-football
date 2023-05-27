@@ -39,7 +39,7 @@ const PlayerList = ({ teamId }) => {
   };
 
   return (
-    <div>
+    <Card>
       <h2>Squad</h2>
       <div className="card-container">
         {squad.map((player) => (
@@ -59,7 +59,7 @@ const PlayerList = ({ teamId }) => {
           </Card>
         ))}
       </div>
-    </div>
+    </Card>
   );
 };
 

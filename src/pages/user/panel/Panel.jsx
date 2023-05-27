@@ -52,7 +52,7 @@ const Panel = ({ setLeagueId }) => {
         setCountries(JSON.parse(storedCountries));
         setDataFetched(true); // Data already fetched
       } else {
-        const apiKey = localStorage.getItem('apiKey'); // Add your API key here
+        const apiKey = localStorage.getItem('apiKey'); 
         console.log('Fetching countries...');
         const response = await axios.get('https://v3.football.api-sports.io/countries', {
           headers: {
@@ -76,7 +76,7 @@ const Panel = ({ setLeagueId }) => {
       if (storedLeagues) {
         setLeagues(JSON.parse(storedLeagues));
       } else {
-        const apiKey = localStorage.getItem('apiKey'); // Add your API key here
+        const apiKey = localStorage.getItem('apiKey');
         console.log('Fetching leagues...');
         const response = await axios.get('https://v3.football.api-sports.io/leagues', {
           params: {
@@ -102,7 +102,7 @@ const Panel = ({ setLeagueId }) => {
       if (storedSeasons) {
         setSeasons(JSON.parse(storedSeasons));
       } else {
-        const apiKey = localStorage.getItem('apiKey'); // Add your API key here
+        const apiKey = localStorage.getItem('apiKey');
         console.log('Fetching seasons...');
         const response = await axios.get('https://v3.football.api-sports.io/leagues/seasons', {
           headers: {
@@ -147,8 +147,7 @@ const Panel = ({ setLeagueId }) => {
 
   const handleSearchTeams = async () => {
     try {
-      const apiKey = localStorage.getItem('apiKey'); // Add your API key here
-
+      const apiKey = localStorage.getItem('apiKey');
       // Check if teams for the selected league are already stored
       const storedTeams = localStorage.getItem(`teams-${selectedLeague}`);
       if (storedTeams) {

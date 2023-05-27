@@ -38,7 +38,7 @@ const PlayerList = ({ leagueId, season }) => {
   };
 
   return (
-    <div>
+    <Card>
       <h2>Player List</h2>
       <ul>
         {players.map((player) => (
@@ -51,7 +51,7 @@ const PlayerList = ({ leagueId, season }) => {
           </li>
         ))}
       </ul>
-    </div>
+    </Card>
   );
 };
 
