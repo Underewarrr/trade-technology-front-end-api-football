@@ -1,6 +1,32 @@
 # Sobre o Projeto
 [Create React App](https://github.com/facebook/create-react-app).
 
+- Para usar o sistema é necessário antes atualizar o localstorage antes de pesquisar qual quer time, isso para evitar que muitas requisições sejam feitais já que o máximo de requisição diria é 100.
+
+- Paginas estilizadas com Bootstrap-css/React-Bootstrap.
+
+### AuthSytem
+Para autenticar as rotas após login usamos o axios para pegar e valida a key fornecida direamente na API, se o status da conta não for valido então redireciona para o login.
+![image](https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/768b2c41-3d77-4a43-98d8-821840033d2a)
+* O sistema de autenticação foi construido em Typescript e Javascript.
+Rota  /user/panel
+![image](https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/70f5f016-31d8-4c34-ad2c-1cc53df22e2c)
+Atualizando o LocalStorage
+![image](https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/ac8e9a40-5e69-482c-bc2b-85c21f424e22)
+Times Listados :  
+
+>Primeiro selecione um pais -> Selecione uma Season -> Selecione uma liga -> Selecione um time
+
+![image](https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/03180ba8-f5dc-4614-bff8-b41bf210f329)
+
+Ja é possivel ver o Time selecionado usando o localStorage 
+![image](https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/87b2cccc-f03f-4e29-810a-530293f2b219)
+Profile View apartir da chave
+![image](https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/7a3d8885-ef31-4b82-bd54-e13e09c7316f)
+
+
+
+
 ### [League -> Team Information -> Team Statistics -> PlayerInformation + AuthSystem ](https://github.com/Underewarrr/trade-technology-front-end-api-football/pull/2)
 ![image](https://github.com/Underewarrr/trade-technology-front-end-api-football/assets/74227915/7b9ac410-ad10-4de7-b432-d5c2adcde630)
 
