@@ -1,7 +1,7 @@
 # Sobre o Projeto
 [Create React App](https://github.com/facebook/create-react-app).
 
-- Para usar o sistema é necessário antes atualizar o localstorage antes de pesquisar qual quer time, isso para evitar que muitas requisições sejam feitais já que o máximo de requisição diria é 100.
+- Para usar o sistema é necessário antes atualizar o localstorage antes de pesquisar qual quer time, isso para evitar que muitas requisições sejam feitais já que o máximo de requisição por dia é 100.
 
 - Paginas estilizadas com Bootstrap-css/React-Bootstrap.
 
